@@ -1,4 +1,5 @@
 const db = require('../db')
+
 class UserController {
     async createUser(req, res) {
         const {login, password} = req.body
