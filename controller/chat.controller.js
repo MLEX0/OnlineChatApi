@@ -8,9 +8,9 @@ class ChatController {
     }
 
     async getChatMessage(res, req){
-        const {id_user, id_coach} = res.body
+        const {IdUser, IdCoach} = res.body
         const messages =
-            await db.query('SELECT * FROM "Message" WHERE "IdRecipient" = $1 AND "IdSender" = $2 OR "IdRecipient" = $2 AND "IdSender" = $1 ORDER BY "SendTime"', [id_user, id_coach])
+            await db.query('SELECT * FROM "Message" WHERE "IdRecipient" = $1 AND "IdSender" = $2 OR "IdRecipient" = $2 AND "IdSender" = $1 ORDER BY "SendTime"', [IdUser, IdCoach])
         req.json(messages.rows)
     }
 }
