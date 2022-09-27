@@ -3,6 +3,6 @@ const router = new Router()
 const messageController = require('../controller/message.controller')
 
 
-router.post('/message', messageController.sendMessage)
+router.post('/', messageController.sendMessage)
 
 module.exports = router

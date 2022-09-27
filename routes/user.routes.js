@@ -1,11 +1,13 @@
+const passport = require('passport')
 const Router = require('express')
 const router = new Router()
 const userController = require('../controller/user.controller')
+//const upload = require('../middleware/upload')
 
-router.post('/user', userController.createUser)
-router.get('/user', userController.getUsers)
-router.get('/user/:id', userController.getOneUser)
-router.put('/user', userController.updateUser)
-router.delete('/user/:id', userController.deleteUser)
+router.post('/', passport.authenticate('jwt', {session:false}) , userController.createUser)
+router.get('/', passport.authenticate('jwt', {session:false}) ,userController.getUsers)
+router.get('/:id', passport.authenticate('jwt', {session:false}) ,userController.getOneUser)
+router.put('/', passport.authenticate('jwt', {session:false}) ,userController.updateUser)
+router.delete('/:id', passport.authenticate('jwt', {session:false}) ,userController.deleteUser)
 
 module.exports = router
