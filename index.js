@@ -16,7 +16,7 @@ require('./middleware/passport')(passport)
 app.use(bodyParser.urlencoded({extended:true}))
 app.use(bodyParser.json())
 app.use(require('morgan')('dev'))
-app.use('/uploads', express.static('uploads'))
+app.use('/uploads', passport.authenticate('jwt', {session:false}) ,express.static('uploads'))
 //app.use(require('cors'))
 
 app.use('/api/auth', authRouter)

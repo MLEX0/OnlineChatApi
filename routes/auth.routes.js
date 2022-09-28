@@ -3,7 +3,7 @@ const router = new Router()
 const authController = require('../controller/auth.controller')
 const upload = require('../middleware/upload')
 
-router.post('/login', authController.login)
+router.get('/login', authController.login)
 router.post('/register', upload.single('image') ,authController.register)
 
 module.exports = router

@@ -43,7 +43,7 @@ class AuthController {
         const candidate = await db.query('SELECT "Login" FROM "User" WHERE "Login" = $1', [Login])
         if(candidate.rows[0]){
             res.status(409).json({
-                message:'User with this login already exists'
+                message:'User with this login is already exists'
             })
             if(uploadImagePath){
                 fs.unlinkSync(uploadImagePath);
