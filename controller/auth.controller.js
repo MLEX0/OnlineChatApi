@@ -11,7 +11,7 @@ class AuthController {
         const {Login, Password} = req.body
         const candidate = await db.query('SELECT * FROM "User" WHERE "Login" = $1', [Login])
         if(candidate.rows[0]){
-            console.log(candidate.rows[0].Password);
+
             const passwordResult = bcrypt.compareSync(Password, candidate.rows[0].Password)
 
             if(passwordResult){
@@ -21,17 +21,19 @@ class AuthController {
                 }, keys.jwt, { expiresIn: 60 * 60 })
 
                 res.status(200).json({
-                    token: `Bearer ${token}`
+                    token: `${token}`,
+                    IdUser: `${candidate.rows[0].ID}`,
+                    UserImage: `${candidate.rows[0].UserImage}`
                 })
 
             } else {
-                res.status(401).json({
+                res.status(200).json({
                     message: 'Wrong password'
                 })
             }
 
         } else {
-            res.status(404).json({
+            res.status(200).json({
                 message:'User with this login does not exist'
             })
         }
@@ -42,7 +44,7 @@ class AuthController {
         const uploadImagePath = req.file ? req.file.path : null
         const candidate = await db.query('SELECT "Login" FROM "User" WHERE "Login" = $1', [Login])
         if(candidate.rows[0]){
-            res.status(409).json({
+            res.status(200).json({
                 message:'User with this login is already exists'
             })
             if(uploadImagePath){

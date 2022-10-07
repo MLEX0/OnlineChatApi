@@ -3,8 +3,8 @@ const db = require('../db')
 class ChatController {
     async getUserChatList(res, req){
         const id = res.params.id
-        const chats = await db.query('SELECT DISTINCT "IdRecipient" FROM "Message" WHERE "IdSender" = $1 AND "IdRecipient" = $1', [id])
-        req.json(chats.rows[0])
+        const chats = await db.query('SELECT DISTINCT "IdRecipient", "IdSender" FROM "Message" WHERE "IdSender" = $1 OR "IdRecipient" = $1', [id])
+        req.json(chats.rows)
     }
 
     async getChatMessage(res, req){

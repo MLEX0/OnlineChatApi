@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS public."Message"
     "FilePath" character varying(2000) DEFAULT NULL,
     "IdSender" integer NOT NULL,
     "IdRecipient" integer NOT NULL,
-    --"IdChat" integer,
+    "IsRead" BOOLEAN DEFAULT FALSE,
     "SendTime" timestamp without time zone DEFAULT now(),
     PRIMARY KEY ("ID")
 );

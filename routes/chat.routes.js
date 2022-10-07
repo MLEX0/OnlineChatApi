@@ -6,6 +6,6 @@ const chatController = require('../controller/chat.controller')
 
 
 router.get('/:id', passport.authenticate('jwt', {session:false}), chatController.getUserChatList)
-router.get('/', passport.authenticate('jwt', {session:false}), chatController.getChatMessage)
+router.post('/', passport.authenticate('jwt', {session:false}), chatController.getChatMessage)
 
 module.exports = router
